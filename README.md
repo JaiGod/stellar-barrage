@@ -21,7 +21,7 @@ An original neon vertical **bullet-hell shoot-'em-up** made in **Godot 4**. Ever
 | Title | Ship select | Stage 1 |
 |:---:|:---:|:---:|
 | <img src="docs/screenshots/title.jpg" width="260" alt="Title screen"> | <img src="docs/screenshots/ships.jpg" width="260" alt="Ship select"> | <img src="docs/screenshots/stage.jpg" width="260" alt="Stage 1 enemy wave"> |
-| **Crimson Choir boss** | **Tidal Engine boss** | **Phone (touch-drag)** |
+| **Crimson Choir boss** | **Tidal Engine boss** | **Touch controls (drag + BOMB/FOCUS)** |
 | <img src="docs/screenshots/boss.jpg" width="260" alt="Crimson Choir boss spell phase"> | <img src="docs/screenshots/boss2.jpg" width="260" alt="Tidal Engine boss phase"> | <img src="docs/screenshots/mobile.jpg" width="260" alt="Mobile layout with BOMB and FOCUS buttons"> |
 
 ## ✨ Features
@@ -93,7 +93,8 @@ On the web build you can jump straight to a fight for testing, for example `play
 - **Touch controls**: an absolute "ship follows finger" scheme would put the thumb over the ship, so movement is a relative drag (x1.3). BOMB and FOCUS sit in the bottom corners, away from the main dodge area.
 - **Web build**: Compatibility renderer and threads off, so GitHub Pages can host it with no special headers.
 - **Testing**: a headless bot plays complete runs with all 3 ships (invulnerable, boosted damage). It checks that every stage, mid-boss and boss phase is reached, that the bullet pool stays under its cap, and that high-score entry, game over, continues and practice all work. CI runs it before every deploy.
-- **Beta tested on the live site ✅ (2026-11-05)**: _pending_
+- **Screenshots**: captured from the live Pages build itself. The export adds a tiny `?shot=1` hook that turns on `preserveDrawingBuffer` so the WebGL canvas can be saved as a JPEG.
+- **Beta tested on the live site ✅ (2026-11-05)**: the landing page loads, `/play/` boots past the loading bar to the title screen, and a full menu run (START → NORMAL → VANTA → LAUNCH) plays with keyboard and touch-drag. Stage 1 waves, the Crimson Choir and Tidal Engine boss phases were checked, with zero console errors.
 
 ## 🔗 More from JaiGod
 
