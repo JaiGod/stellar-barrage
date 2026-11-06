@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stellar Barrage - neon vertical bullet-hell shmup</title>
+<meta name="description" content="Weave through neon bullet curtains, graze for points and break multi-phase bosses. An original vertical bullet-hell shoot-'em-up made in Godot 4. Play free in your browser.">
+<meta name="theme-color" content="#030108">
+<link rel="icon" href="play/index.icon.png">
+<style>
+:root{--bg:#030108;--panel:#0b0717;--line:#2a1d4a;--ink:#f2ecff;--dim:#a69cc4;--cyan:#33e6ff;--mag:#ff4de1;--gold:#ffe45c;--green:#7dff5a;--red:#ff5a6e}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 16px 48px}
+header{text-align:center;padding:64px 0 24px}
+.eyebrow{letter-spacing:.25em;text-transform:uppercase;color:var(--dim);font-size:12px}
+h1{font-size:clamp(40px,11vw,88px);line-height:1;margin:14px 0 8px;letter-spacing:.06em}
+h1 .a{color:var(--cyan);text-shadow:0 0 24px #33e6ff88}
+h1 .b{color:var(--mag);text-shadow:0 0 24px #ff4de188}
+.tag{font-size:clamp(16px,3.8vw,21px);margin:0 0 28px}
+.play{display:inline-flex;align-items:center;gap:12px;padding:18px 42px;font-size:22px;font-weight:800;color:#170420;background:var(--mag);border:2px solid #ffc2f5;border-radius:6px;text-decoration:none;box-shadow:0 0 30px #ff4de166;letter-spacing:.05em}
+.play:hover{transform:translateY(-2px);box-shadow:0 0 46px #ff4de1aa}
+.sub{margin-top:14px;color:var(--dim);font-size:14px}
+.sub a{color:var(--cyan)}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:34px 0}
+.shots img{width:100%;display:block;border:1px solid var(--line);border-radius:6px;box-shadow:0 0 20px #ff4de122}
+h2{color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;font-size:20px;margin:40px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--c,var(--cyan));border-radius:6px;padding:14px 16px}
+.card b{color:var(--c,var(--cyan))}
+.card p{margin:6px 0 0;color:var(--dim);font-size:14px}
+kbd{background:#160f2b;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px;color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{color:var(--gold);white-space:nowrap}
+footer{text-align:center;color:var(--dim);font-size:14px;margin-top:48px}
+footer a{color:var(--cyan)}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<main>
+<header>
+  <div class="eyebrow">Godot 4 · vertical bullet-hell shmup</div>
+  <h1><span class="a">STELLAR</span> <span class="b">BARRAGE</span></h1>
+  <p class="tag">Thread the curtain. Graze the light. Break the star-gods.</p>
+  <a class="play" href="play/">&#9654; PLAY IN BROWSER</a>
+  <div class="sub">Free · desktop &amp; phone · keyboard, gamepad or touch-drag · <a href="https://github.com/JaiGod/stellar-barrage">source on GitHub</a></div>
+</header>
+
+<section class="shots">
+  <img src="screenshots/title.jpg" alt="Stellar Barrage title screen" loading="lazy" onerror="this.remove()">
+  <img src="screenshots/stage.jpg" alt="Dodging an enemy wave in stage 1" loading="lazy" onerror="this.remove()">
+  <img src="screenshots/boss.jpg" alt="A boss spell phase filling the screen with bullets" loading="lazy" onerror="this.remove()">
+  <img src="screenshots/ships.jpg" alt="Ship select screen" loading="lazy" onerror="this.remove()">
+</section>
+
+<h2>Features</h2>
+<div class="grid">
+  <div class="card" style="--c:var(--cyan)"><b>3 ships, 3 styles</b><p>VANTA spread nova, LANCE needle beam, SEEKER homing swarm. Each has its own speed, focus shot and screen-clearing bomb.</p></div>
+  <div class="card" style="--c:var(--mag)"><b>5 stages, 10 bosses</b><p>Every stage has a mid-boss and a multi-phase boss with named spell phases. 20 boss phases in total, ending in the Null Seraph.</p></div>
+  <div class="card" style="--c:var(--gold)"><b>Graze for score</b><p>Brush past bullets to build an x8 multiplier. Break a boss phase without bombing or dying for a PERFECT BREAK.</p></div>
+  <div class="card" style="--c:var(--green)"><b>Power-ups &amp; bombs</b><p>Collect power to level up your shot four times. Bombs cancel bullets into star points, and a quick bomb on hit saves you (deathbomb).</p></div>
+  <div class="card" style="--c:var(--red)"><b>4 difficulties + practice</b><p>EASY to OVERDRIVE, a top-10 table per difficulty with name entry, and a practice mode for any stage.</p></div>
+  <div class="card" style="--c:#b98cff"><b>Thousands of bullets</b><p>Bullets are pooled and drawn in one MultiMesh batch, so dense patterns stay smooth on phones. All art and music is generated in code.</p></div>
+</div>
+
+<h2>Controls</h2>
+<table>
+<tr><td>Keyboard</td><td><kbd>Arrows</kbd>/<kbd>WASD</kbd> move · <kbd>Z</kbd> shoot · <kbd>X</kbd> bomb · <kbd>Shift</kbd> focus (slow, shows hitbox) · <kbd>Esc</kbd>/<kbd>P</kbd> pause · <kbd>M</kbd> mute</td></tr>
+<tr><td>Touch</td><td>Drag anywhere to move (relative, your finger never covers the ship) · auto-fire while touching · BOMB and FOCUS buttons in the corners · pause top right</td></tr>
+<tr><td>Gamepad</td><td>Stick/D-pad move · A shoot · B bomb · X or shoulders focus · Start pause</td></tr>
+</table>
+
+<footer>
+  Made by Jaineil Rana (JaKing) · part of <a href="https://github.com/JaiGod">JaiGod</a> ·
+  <a href="https://github.com/JaiGod/stellar-barrage">GitHub repo</a> · MIT License
+</footer>
+</main>
+<script>
+(function(){
+  var c=document.getElementById('bg'),x=c.getContext('2d'),W,H,s=[],b=[],t=0;
+  function size(){W=c.width=innerWidth;H=c.height=innerHeight;s=[];
+    for(var i=0;i<120;i++)s.push([Math.random()*W,Math.random()*H,.3+Math.random()]);}
+  function f(){t+=1/60;x.fillStyle='rgba(3,1,8,.35)';x.fillRect(0,0,W,H);
+    s.forEach(function(p){p[1]+=p[2]*1.2;if(p[1]>H)p[1]=0;x.fillStyle='rgba(200,190,255,'+p[2]*.6+')';x.fillRect(p[0],p[1],1.5,1.5);});
+    if(Math.floor(t*60)%50==0){var cx=W*(.2+Math.random()*.6),cy=H*.25,n=18,o=Math.random()*7,col=['#33e6ff','#ff4de1','#ffe45c'][Math.floor(Math.random()*3)];
+      for(var k=0;k<n;k++){var a=o+k/n*6.283;b.push([cx,cy,Math.cos(a)*1.4,Math.sin(a)*1.4,col]);}}
+    b=b.filter(function(q){q[0]+=q[2];q[1]+=q[3];x.globalAlpha=.55;x.fillStyle=q[4];x.beginPath();x.arc(q[0],q[1],3,0,7);x.fill();x.globalAlpha=1;
+      return q[0]>-10&&q[0]<W+10&&q[1]>-10&&q[1]<H+10;});
+    requestAnimationFrame(f);}
+  addEventListener('resize',size);size();f();
+})();
+</script>
+</body>
+</html>
